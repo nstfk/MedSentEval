@@ -32,7 +32,7 @@ class RQEEval(object):
         dev = self.loadFile(os.path.join(task_path,
                              'rqe_dev.txt'))
         
-        self.rqe_data = {'train': train, 'test': test}
+        self.rqe_data = {'train': train,'dev': dev, 'test': test}
         
 
     def do_prepare(self, params, prepare):
