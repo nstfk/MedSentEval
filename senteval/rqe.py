@@ -33,7 +33,7 @@ class RQEEval(object):
         
         dev = self.loadFile(os.path.join(task_path,
                              'rqe_dev.txt'))
-        print('dev',len(dev['chq']))
+        print('dev',len(dev['chq'],len(dev['faq'],len(dev['label']))
         
         self.rqe_data = {'dev': dev,'train': train, 'test': test}
         
