@@ -29,7 +29,7 @@ class RQEEval(object):
         print('train',len(train['chq']))
         test = self.loadFile(os.path.join(task_path,
                              'rqe_test.txt'))
-        print('test',len(test['chq']))
+        print('dev',len(test['chq']),len(test['faq']),len(test['label']))
         
         dev = self.loadFile(os.path.join(task_path,
                              'rqe_dev.txt'))
@@ -58,7 +58,7 @@ class RQEEval(object):
                   #print(text[0],"-",text[1],"-",text[2],"-",text[3])
                   rqe_data['faq'].append(text[3].split(' '))
                   rqe_data['chq'].append(text[2].split(' '))
-                  rqe_data['label'].append(tgt2idx[text[1]])
+                  rqe_data['label'].append(tgt2idx[text[1].lower()])
                   rqe_data['pid'].append(text[0])
                 except:
                   pass
