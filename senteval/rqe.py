@@ -35,7 +35,7 @@ class RQEEval(object):
                              'rqe_dev.txt'))
         print('dev',len(dev['chq']))
         
-        self.rqe_data = {'train': train,'dev': dev, 'test': test}
+        self.rqe_data = {'dev': dev,'train': train, 'test': test}
         
 
     def do_prepare(self, params, prepare):
