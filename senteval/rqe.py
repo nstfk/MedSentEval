@@ -26,14 +26,14 @@ class RQEEval(object):
         self.seed = seed
         train = self.loadFile(os.path.join(task_path,
                               'rqe_train.txt'))
-        print('train',len(train))
+        print('train',len(train['chq']))
         test = self.loadFile(os.path.join(task_path,
                              'rqe_test.txt'))
-        print('test',len(test))
+        print('test',len(test['chq']))
         
         dev = self.loadFile(os.path.join(task_path,
                              'rqe_dev.txt'))
-        print('dev',len(dev))
+        print('dev',len(dev['chq']))
         
         self.rqe_data = {'train': train,'dev': dev, 'test': test}
         
