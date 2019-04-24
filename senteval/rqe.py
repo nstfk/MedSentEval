@@ -68,7 +68,7 @@ class RQEEval(object):
         rqe_embed = {'train': {},'dev': {}, 'test': {}}
 
         for key in self.rqe_data:
-            logging.info('Computing embedding for {0}'.format(key))
+            print('Computing embedding for {0}'.format(key))
             # Sort to reduce padding
             text_data = {}
             sorted_corpus = sorted(zip(self.rqe_data[key]['chq'],
