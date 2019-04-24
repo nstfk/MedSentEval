@@ -15,7 +15,7 @@ import logging
 import numpy as np
 import io
 
-from senteval.tools.validation import KFoldClassifier
+from senteval.tools.validation import SplitClassifier
 
 from sklearn.metrics import f1_score
 
@@ -29,6 +29,9 @@ class RQEEval(object):
         test = self.loadFile(os.path.join(task_path,
                              'rqe_test.txt'))
         
+        dev = self.loadFile(os.path.join(task_path,
+                             'rqe_dev.txt'))
+        
         self.rqe_data = {'train': train, 'test': test}
         
 
@@ -36,7 +39,9 @@ class RQEEval(object):
         # TODO : Should we separate samples in "train, test"?
         samples = self.rqe_data['train']['chq'] + \
                   self.rqe_data['train']['faq'] + \
-                  self.rqe_data['test']['chq'] + self.rqe_data['test']['faq']
+                  self.rqe_data['test']['chq'] + self.rqe_data['test']['faq']+\
+                  self.rqe_data['dev']['chq'] + self.rqe_data['dev']['faq']
+                  
         return prepare(params, samples)
 
     def loadFile(self, fpath):
@@ -57,7 +62,7 @@ class RQEEval(object):
         return rqe_data
 
     def run(self, params, batcher):
-        rqe_embed = {'train': {}, 'test': {}}
+        rqe_embed = {'train': {},'dev': {}, 'test': {}}
 
         for key in self.rqe_data:
             logging.info('Computing embedding for {0}'.format(key))
@@ -96,15 +101,26 @@ class RQEEval(object):
         #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
         testCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
         testY = rqe_embed['test']['label']
+        
+        # dev
+        devC = rqe_embed['dev']['chq']
+        devF = rqe_embed['dev']['faq']
+        #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
+        devCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
+        testY = rqe_embed['dev']['label']
 
         config = {'nclasses': 2, 'seed': self.seed,
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
-        clf = KFoldClassifier(train={'X': trainCF, 'y': trainY},
-                              test={'X': testCF, 'y': testY}, config=config)
-
+             clf = SplitClassifier(X={'train': trainCF,
+                                 'valid': devCF,
+                                 'test': testCF},
+                              y={'train': trainY,
+                                 'valid': devY,
+                                 'test': testY},config=config)
         devacc, testacc, yhat = clf.run()
+        print(yhat)
         testf1 = round(100*f1_score(testY, yhat), 2)
         logging.debug('Dev acc : {0} Test acc {1}; Test F1 {2} for RQE.\n'
                       .format(devacc, testacc, testf1))
