@@ -113,7 +113,7 @@ class RQEEval(object):
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
-             clf = SplitClassifier(X={'train': trainCF,
+        clf = SplitClassifier(X={'train': trainCF,
                                  'valid': devCF,
                                  'test': testCF},
                               y={'train': trainY,
