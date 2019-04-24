@@ -26,11 +26,14 @@ class RQEEval(object):
         self.seed = seed
         train = self.loadFile(os.path.join(task_path,
                               'rqe_train.txt'))
+        print('train',len(train))
         test = self.loadFile(os.path.join(task_path,
                              'rqe_test.txt'))
+        print('test',len(test))
         
         dev = self.loadFile(os.path.join(task_path,
                              'rqe_dev.txt'))
+        print('dev',len(dev))
         
         self.rqe_data = {'train': train,'dev': dev, 'test': test}
         
@@ -94,6 +97,7 @@ class RQEEval(object):
         #trainCF = np.c_[trainC, trainF,np.abs(trainC - trainF), (trainC * trainF)]
         trainCF = np.hstack((trainC, trainF, trainC * trainF,np.abs(trainC - trainF)))
         trainY = rqe_embed['train']['label']
+        print('Done embdding for train')
 
         # Test
         testC = rqe_embed['test']['chq']
@@ -102,12 +106,16 @@ class RQEEval(object):
         testCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
         testY = rqe_embed['test']['label']
         
+        print('Done embdding for test')
+        
         # dev
         devC = rqe_embed['dev']['chq']
         devF = rqe_embed['dev']['faq']
         #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
         devCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
         testY = rqe_embed['dev']['label']
+        
+        print('Done embdding for dev')
 
         config = {'nclasses': 2, 'seed': self.seed,
                   'usepytorch': params.usepytorch,
