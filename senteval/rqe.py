@@ -65,7 +65,7 @@ class RQEEval(object):
         return rqe_data
 
     def run(self, params, batcher):
-        rqe_embed = {'train': {},'dev': {}, 'test': {}}
+        rqe_embed = {'dev': {}, 'train': {}, 'test': {}}
 
         for key in self.rqe_data:
             print('Computing embedding for {0}'.format(key))
