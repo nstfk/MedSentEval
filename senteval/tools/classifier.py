@@ -141,6 +141,7 @@ class PyTorchClassifier(object):
                 yhat = np.append(yhat,
                                  output.data.max(1)[1].cpu().numpy())
         yhat = np.vstack(yhat)
+        print(yhat)
         return yhat
 
     def predict_proba(self, devX):
