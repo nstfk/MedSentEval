@@ -132,7 +132,7 @@ class RQEEval(object):
         devacc, testacc = clf.run()
         logging.debug('Dev acc : {0} Test acc : {1} for PICO\n'
                       .format(devacc, testacc))
-        
+        print(text_data['pid'])
         #testf1 = round(100*f1_score(testY, yhat), 2)
         logging.debug('Dev acc : {0} Test acc {1};  for RQE.\n'
                       .format(devacc, testacc))
