@@ -128,11 +128,13 @@ class RQEEval(object):
                               y={'train': trainY,
                                  'valid': devY,
                                  'test': testY},config=config)
-        devacc, testacc, yhat = clf.run()
-        print(yhat)
-        testf1 = round(100*f1_score(testY, yhat), 2)
-        logging.debug('Dev acc : {0} Test acc {1}; Test F1 {2} for RQE.\n'
-                      .format(devacc, testacc, testf1))
-        return {'devacc': devacc, 'acc': testacc, 'f1': testf1,
+        devacc, testacc = clf.run()
+        logging.debug('Dev acc : {0} Test acc : {1} for PICO\n'
+                      .format(devacc, testacc))
+        
+        #testf1 = round(100*f1_score(testY, yhat), 2)
+        logging.debug('Dev acc : {0} Test acc {1};  for RQE.\n'
+                      .format(devacc, testacc))
+        return {'devacc': devacc, 'acc': testacc,
                 'ndev': len(trainCF), 'ntest': len(testCF)}
 
