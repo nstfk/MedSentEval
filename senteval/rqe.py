@@ -113,7 +113,7 @@ class RQEEval(object):
         devC = rqe_embed['dev']['chq']
         devF = rqe_embed['dev']['faq']
         #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
-        devCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
+        devCF = np.hstack((devC, devF, devC * devF,np.abs(devC - devF)))
         devY = rqe_embed['dev']['label']
         
         print('Done embdding for dev')
