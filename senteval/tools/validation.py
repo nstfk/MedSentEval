@@ -227,7 +227,7 @@ class SplitClassifier(object):
         else:
             clf = LogisticRegression(C=optreg, random_state=self.seed)
             clf.fit(self.X['train'], self.y['train'])
-        yhat = clf.predict(X_test)
+        yhat = clf.predict(self.X['test'])
         testaccuracy = clf.score(self.X['test'], self.y['test'])
         testaccuracy = round(100*testaccuracy, 2)
         return devaccuracy, testaccuracy,yhat
