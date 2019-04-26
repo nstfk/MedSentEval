@@ -84,7 +84,7 @@ class MedNLIEval(object):
             if key not in self.y:
                 self.y[key] = []
 
-            input1, input2, mylabels = self.data[key]
+            input1, input2, mylabels,ids = self.data[key]
             enc_input = []
             n_labels = len(mylabels)
             for ii in range(0,n_labels, params.batch_size):
