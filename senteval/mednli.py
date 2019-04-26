@@ -110,8 +110,16 @@ class MedNLIEval(object):
         config['classifier'] = config_classifier
 
         clf = SplitClassifier(self.X, self.y, config)
-        devacc, testacc = clf.run()
-        logging.debug('Dev acc : {0} Test acc : {1} for SNLI\n'
+        
+        devacc, testacc,yhat= clf.run()
+        
+        pred=[]
+        print(text_data['pid'])
+        for i in yhat:
+            pred.append(i)
+        print(pred)
+       
+        logging.debug('Dev acc : {0} Test acc : {1} for MedNLI\n'
                       .format(devacc, testacc))
         return {'devacc': devacc, 'acc': testacc,
                 'ndev': len(self.data['valid'][0]),
