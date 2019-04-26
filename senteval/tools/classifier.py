@@ -54,7 +54,7 @@ class PyTorchClassifier(object):
         trainy = torch.from_numpy(np.array(trainy)).to(device, dtype=torch.int64)
         devX = torch.from_numpy(devX).to(device, dtype=torch.float32)
         devy = torch.from_numpy(np.array(devy)).to(device, dtype=torch.int64)
-        print(len(devX),len(devy))
+        
 
         return trainX, trainy, devX, devy
 
