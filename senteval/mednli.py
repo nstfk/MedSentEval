@@ -60,6 +60,7 @@ class MedNLIEval(object):
         sorted_test = sorted(zip(test2, test1, testlabels,testids),
                              key=lambda z: (len(z[0]), len(z[1]), z[2],z[3]))
         test2, test1, testlabels,testids = map(list, zip(*sorted_test))
+        print(testids)
 
         self.samples = train1 + train2 + valid1 + valid2 + test1 + test2
         self.data = {'train': (train1, train2, trainlabels,trainids),
@@ -122,7 +123,7 @@ class MedNLIEval(object):
         devacc, testacc,yhat= clf.run()
         
         pred=[]
-        print(testids)
+        print(self.data['test'][3])
         for i in yhat:
             pred.append(i)
         print(pred)
