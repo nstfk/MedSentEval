@@ -130,8 +130,7 @@ class RQEEval(object):
                                  'valid': devY,
                                  'test': testY},config=config)
         devacc, testacc,yhat= clf.run()
-        logging.debug('Dev acc : {0} Test acc : {1} for PICO\n'
-                      .format(devacc, testacc))
+        
         pred=[]
         print(text_data['pid'])
         for i in yhat:
