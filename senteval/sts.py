@@ -24,7 +24,7 @@ class STSEval(object):
         self.samples = []
 
         for dataset in self.datasets:
-            sent1, sent2 = zip(*[l.split("\t") for l in
+            sent1, sent2 = zip(*[l.split("\\\\") for l in
                                io.open(fpath + '/STS.input.%s.txt' % dataset,
                                        encoding='utf8').read().splitlines()])
             raw_scores = np.array([x for x in
