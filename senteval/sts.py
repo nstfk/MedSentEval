@@ -40,8 +40,7 @@ class STSEval(object):
             sorted_data = sorted(zip(sent1, sent2, gs_scores),
                                  key=lambda z: (len(z[0]), len(z[1]), z[2]))
             sent1, sent2, gs_scores = map(list, zip(*sorted_data))
-            print(sent1)
-            print(sent2)
+            
 
             self.data[dataset] = (sent1, sent2, gs_scores)
             self.samples += sent1 + sent2
@@ -70,6 +69,8 @@ class STSEval(object):
                     for kk in range(enc2.shape[0]):
                         sys_score = self.similarity(enc1[kk], enc2[kk])
                         sys_scores.append(sys_score)
+            for f, b in zip(sent1, sent2,sys_scores):
+                print(i," ".join(f ), " ".join(b))
             print(sys_scores)
             results[dataset] = {'pearson': pearsonr(sys_scores, gs_scores),
                                 'spearman': spearmanr(sys_scores, gs_scores),
