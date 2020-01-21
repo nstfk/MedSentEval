@@ -82,7 +82,7 @@ def batcher(params, batch):
     #flair_encoder.embed(sentences)
       
     for sent in  sentences: 
-        embeddings.append(sent.embedding.numpy())
+        embeddings.append(sent.embedding.detach().numpy() )
         
         
     embeddings = np.vstack(embeddings)
