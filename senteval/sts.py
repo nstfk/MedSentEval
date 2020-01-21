@@ -100,5 +100,5 @@ class BIOSSESEval(STSEval):
         logging.debug('***** Transfer task : BIOSSES *****\n\n')
         self.seed = seed
         self.datasets = ['BIOSSES']
-        self.loadFile(taskpath)
+        self.loadFile(taskpath) 
 
