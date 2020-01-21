@@ -40,6 +40,8 @@ class STSEval(object):
             sorted_data = sorted(zip(sent1, sent2, gs_scores),
                                  key=lambda z: (len(z[0]), len(z[1]), z[2]))
             sent1, sent2, gs_scores = map(list, zip(*sorted_data))
+            print(sent1)
+            print(sent2)
 
             self.data[dataset] = (sent1, sent2, gs_scores)
             self.samples += sent1 + sent2
