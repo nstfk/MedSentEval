@@ -69,7 +69,7 @@ class STSEval(object):
                     for kk in range(enc2.shape[0]):
                         sys_score = self.similarity(enc1[kk], enc2[kk])
                         sys_scores.append(sys_score)
-            for f, b in zip(sent1, sent2,sys_scores):
+            for f, b in zip(input1, input22,sys_scores):
                 print(i," ".join(f ), " ".join(b))
             print(sys_scores)
             results[dataset] = {'pearson': pearsonr(sys_scores, gs_scores),
