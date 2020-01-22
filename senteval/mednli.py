@@ -122,14 +122,25 @@ class MedNLIEval(object):
         
         devacc, testacc,yhat,probs= clf.run()
         
-        pred=[]
+        
         print(self.data['test'][0])
         print(self.data['test'][1])
-        print(yhat)
-        for i in yhat:
-            pred.append(i)
         print(pred)
         print(probs)
+		pp=[]
+		i=0
+		while i<52:
+  #print(i)
+			pp.append([probs[i],probs[i+1],probs[i+2]])
+			i=i+3
+		dico_label = {0:'entailment',1: 'neutral',2:'contradiction'}
+		predictions=[]
+		for i in preds:
+			predictions.append(dico_label[i[0]])
+
+		for i,j,k,l in zip(pp,predictions,s1,s2):
+			print(" ".join(k),"\t"," ".join(l),"\t",j,"\t",i)
+        
        
         logging.debug('Dev acc : {0} Test acc : {1} for MedNLI\n'
                       .format(devacc, testacc))
