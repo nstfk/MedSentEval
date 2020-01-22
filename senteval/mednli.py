@@ -122,7 +122,7 @@ class MedNLIEval(object):
 
         print(self.data['test'][0])
         print(self.data['test'][1])
-        print(pred)
+        print(preds)
         print(probs)
         pp = []
         i = 0
