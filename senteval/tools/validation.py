@@ -231,10 +231,10 @@ class SplitClassifier(object):
         pred=[]
         probs=[]
         for i in yprobs:
-            probs.append(i)
+            probs.append(list(i))
         print(probs)
         for i in yhat:
-            pred.append(i)
+            pred.append(list(i))
         print(pred)
         testaccuracy = clf.score(self.X['test'], self.y['test'])
         testaccuracy = round(100*testaccuracy, 2)
