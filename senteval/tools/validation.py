@@ -238,4 +238,4 @@ class SplitClassifier(object):
         print(pred)
         testaccuracy = clf.score(self.X['test'], self.y['test'])
         testaccuracy = round(100*testaccuracy, 2)
-        return devaccuracy, testaccuracy,preds,probs
+        return devaccuracy, testaccuracy,pred,probs
