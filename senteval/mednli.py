@@ -133,7 +133,7 @@ class MedNLIEval(object):
         predictions = []
         for i in preds:
             predictions.append(dico_label[i[0]])
-        for i, j, k, l in zip(pp, predictions, s1, s2):
+        for i, j, k, l in zip(pp, predictions, self.data['test'][0], self.data['test'][1]):
             print(" ".join(k), "\t", " ".join(l), "\t", j, "\t", i)
 
         logging.debug('Dev acc : {0} Test acc : {1} for MedNLI\n'
