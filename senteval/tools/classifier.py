@@ -134,15 +134,18 @@ class PyTorchClassifier(object):
         if not isinstance(devX, torch.cuda.FloatTensor):
             devX = torch.FloatTensor(devX).cuda()
         yhat = np.array([])
+        yprobs=np.array([])
         with torch.no_grad():
             for i in range(0, len(devX), self.batch_size):
                 Xbatch = devX[i:i + self.batch_size]
                 output = self.model(Xbatch)
+                yprobs=np.apend(yprobs,output)
                 yhat = np.append(yhat,
                                  output.data.max(1)[1].cpu().numpy())
         yhat = np.vstack(yhat)
+        yprobs = np.vstack(yprobs)
 
-        return yhat
+        return yhat,yprobs
 
     def predict_proba(self, devX):
         self.model.eval()
