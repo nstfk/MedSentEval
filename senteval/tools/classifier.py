@@ -139,7 +139,7 @@ class PyTorchClassifier(object):
             for i in range(0, len(devX), self.batch_size):
                 Xbatch = devX[i:i + self.batch_size]
                 output = self.model(Xbatch)
-                yprobs=np.apend(yprobs,output)
+                yprobs=np.append(yprobs,output)
                 yhat = np.append(yhat,
                                  output.data.max(1)[1].cpu().numpy())
         yhat = np.vstack(yhat)
