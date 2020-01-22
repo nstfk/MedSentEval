@@ -120,7 +120,7 @@ class MedNLIEval(object):
 
         clf = SplitClassifier(self.X, self.y, config)
         
-        devacc, testacc,yhat= clf.run()
+        devacc, testacc,yhat,probs= clf.run()
         
         pred=[]
         print(self.data['test'][0])
@@ -129,6 +129,7 @@ class MedNLIEval(object):
         for i in yhat:
             pred.append(i)
         print(pred)
+        print(probs)
        
         logging.debug('Dev acc : {0} Test acc : {1} for MedNLI\n'
                       .format(devacc, testacc))
